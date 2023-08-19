@@ -1,10 +1,15 @@
-/* Requires the Docker Pipeline plugin */
 pipeline {
-    agent { docker { image 'python:3.11.4-alpine3.18' } }
+    agent {
+        docker {
+            // Use the Python image as the build environment
+            image 'python:3.11.4'
+            args '-u'  // unbuffered output
+        }
+    }
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                sh 'python --version'
+                sh 'echo "Hello, world!"'
             }
         }
     }
