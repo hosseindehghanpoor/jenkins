@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'python --version'
+                sh 'echo "Hello World"'
             }
         }
     }
