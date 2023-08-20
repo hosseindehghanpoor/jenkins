@@ -2,7 +2,8 @@ pipeline {
     agent any
     environment {
         DOCKER_REGISTRY = '192.168.122.10:5000'
-        DOCKER_IMAGE = "${DOCKER_REGISTRY}/mypython:v3"
+	PROJECT_VERSION = readFile('projectInfo').readLines().find { it.startsWith('version=') }?.replaceAll('version=', '').trim()
+        DOCKER_IMAGE = "${DOCKER_REGISTRY}/mypython:${PROJECT_VERSION}"
     }
     stages {
         stage('Pre-Built Message') {
