@@ -2,16 +2,14 @@ pipeline {
     agent any
     environment {
         DOCKER_REGISTRY = '192.168.122.10:5000'
-        DOCKER_IMAGE = "${DOCKER_REGISTRY}/mypython:v2"
+        DOCKER_IMAGE = "${DOCKER_REGISTRY}/mypython:v3"
     }
     stages {
         stage('Pre-Built Message') {
             steps {
-                sh '''
-                echo "Hello World"
-                echo "here we are going to create Dockerfile"
-                docker build -t test:v2 .
-                '''
+		script {
+                    def dockerImage = docker.build(DOCKER_IMAGE, '-f Dockerfile .')
+                }
             }
         }
 	stage('Builing the image') {
