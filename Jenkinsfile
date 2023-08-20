@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY = '192.168.122.10:5000'
 	PROJECT_VERSION = readFile('projectInfo').replaceAll('version=', '').trim()
-        DOCKER_IMAGE = "${DOCKER_REGISTRY}/mypython:v4"
+        DOCKER_IMAGE = "${DOCKER_REGISTRY}/mypython:${PROJECT_VERSION}"
     }
     stages {
         stage('Pre-Built Message') {
