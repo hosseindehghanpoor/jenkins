@@ -1,9 +1,11 @@
 pipeline {
-    agent { 
-        docker 
-        image { 'python:3.9-slim' 
-        } 
+    agent {
+    docker {
+        label 'docker'
+        image 'python:3.9-slim'
     }
+}
+
     stages {
         stage('simplecommand') {
             steps {
