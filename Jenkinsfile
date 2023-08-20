@@ -1,12 +1,10 @@
 pipeline {
-    agent any
+    agent {docker image { 'python:3.9-slim' } }
     stages {
-        stage('Build') {
+        stage('simplecommand') {
             steps {
                 sh '''
-                echo "Hello World"
-                echo "here we are going to create Dockerfile"
-                docker build -t test:v2 .
+                python3 --version
                 '''
             }
         }
