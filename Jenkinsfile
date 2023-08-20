@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_REGISTRY = '192.168.122.10:5000'
-	PROJECT_VERSION = readFile('projectInfo').readLines().find { it.startsWith('version=') }?.replaceAll('version=', '').trim()
+	PROJECT_VERSION = readFile('projectInfo').replaceAll('version=', '').trim()
         DOCKER_IMAGE = "${DOCKER_REGISTRY}/mypython:v4"
     }
     stages {
