@@ -17,8 +17,8 @@ pipeline {
 	stage('Builing the image') {
 	    steps {
 	        sh '''
-		echo ${PROJECT_VERSION} versiiiiiiiiiiiion
-		echo ${PROJECT_VERSION_NEW} versiiiiiiiiiiiion_NEWWWWWW
+		echo "Version is: ${PROJECT_VERSION}"
+		echo "New Version is: ${PROJECT_VERSION_NEW}"
 		docker build -t ${DOCKER_IMAGE} .
 		echo "builing DONE"
  		'''
