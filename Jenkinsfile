@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY = '192.168.122.10:5000'
 	PROJECT_VERSION = readFile('projectInfo').replaceAll('version=', '').trim()
-	PROJECT_VERSION_NEW =  readFile('projectInfo').readLines()
+	PROJECT_VERSION_NEW =  readFile('projectInfo').readLines().find { it.startsWith('version=') }
         DOCKER_IMAGE = "${DOCKER_REGISTRY}/mypython:v4"
     }
     stages {
