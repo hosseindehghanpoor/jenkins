@@ -12,17 +12,15 @@ pipeline {
 			    def userChoice = input(
 				id: 'userInput',
 				message: 'Please select an option:',
-				parameters: [
-				    [$class: 'ExtensibleChoiceParameterDefinition',
-				     name: 'CHOICE',
-				     description: 'Select an option',
-				     groovyScript: [
-					 script: """
-					     return ['Option 1', 'Option 2', 'Option 3']
-					 """
-				     ]
-				    ]
-				]
+                                parameters: [
+                                	[$class: 'ExtensibleChoiceParameterDefinition',
+                             		name: 'CHOICE',
+                             		description: 'Select an option',
+                             		visibleItemCount: 3,
+                             		type: 'PT_SINGLE_SELECT',
+                             		value: 'Option 1\nOption 2\nOption 3'
+                           		 ]
+                        	]
 			    )
 
 			    echo "User selected: ${userChoice}"
