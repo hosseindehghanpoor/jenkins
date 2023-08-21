@@ -5,30 +5,38 @@ pipeline {
 	PROJECT_VERSION = readFile('projectInfo').replaceAll('version=', '').trim()
         DOCKER_IMAGE = "${DOCKER_REGISTRY}/mypython:${PROJECT_VERSION}"
     }
-    stages {
-        stage('Pre-Built Message') {
-            steps {
-		script {
-                    def dockerImage = docker.build(DOCKER_IMAGE, '-f Dockerfile .')
-                }
-            }
-        }
-	stage('Builing the image') {
-	    steps {
-	        sh '''
-		echo "Version is: ${PROJECT_VERSION}"
-		docker build -t ${DOCKER_IMAGE} .
-		echo "builing DONE"
- 		'''
-            }
-	}
-	stage('Pushing the image') {
-	    steps {
-		sh '''
-		echo "Pushing"
-		docker push ${DOCKER_IMAGE}
-		'''
+	stages {
+		stage('Input Stage') {
+		    steps {
+			script {
+			    def userChoice = input(
+				id: 'userInput',
+				message: 'Please select an option:',
+				parameters: [
+				    [$class: 'ExtensibleChoiceParameterDefinition',
+				     name: 'CHOICE',
+				     description: 'Select an option',
+				     groovyScript: [
+					 script: """
+					     return ['Option 1', 'Option 2', 'Option 3']
+					 """
+				     ]
+				    ]
+				]
+			    )
+
+			    echo "User selected: ${userChoice}"
+			}
+		    }
+		}
+		
+		stage('Next Stage') {
+		    steps {
+			echo "This is the next stage"
+			// Add your actual pipeline steps here
+		    }
+		}
 	    }
-	}
-    }
+
+
 }
