@@ -1,0 +1,13 @@
+pipeline {
+	agent any
+	stages {
+		stage('build') {
+			steps {
+				sh '''
+					docker build -t remotework:5000/test:v4 .
+					docker push remotework:5000/test:v4
+				'''
+			}
+		}
+	}
+}
